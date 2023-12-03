@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% comment %}
+<!-- parking_app/templates/main.html -->
+
+{% extends 'base.html' %}
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-9">
+            <!-- Main Section -->
+            <h2>Available Parking Places</h2>
+            {% if available_places %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Place Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for place in available_places %}
+                            <tr>
+                                <td>{{ place.name }}</td>
+                                <td>
+                                    <a href="{% url 'reserve_place' place.id %}" class="btn btn-success">Reserve</a>
+                                    <a href="{% url 'skip_place' %}" class="btn btn-warning">Skip</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No available parking places.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% endcomment %}
+
+
+{% block content %}
+  <div class="container mt-5">
+    {% if available_place %}
+      <h2 class="mb-4">Available Place</h2>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">{{ available_place.name }}</h3>
+          <p class="card-text">{{ available_place.description }}</p>
+          <!-- Add more details as needed -->
+          <form action="{% url 'reserve_place' available_place.id %}" method="post" class="d-flex">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary mr-2">Reserve</button>
+          </form>
+          <form action="{% url 'skip_place'  %}" method="post" class="d-flex">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary">Skip</button>
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <p>No available places at the moment.</p>
+    {% endif %}
+  </div>
+{% endblock %}

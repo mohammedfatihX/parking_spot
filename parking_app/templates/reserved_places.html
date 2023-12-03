@@ -1,0 +1,31 @@
+<!-- parking_app/templates/reserved_places.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Reserved Parking Places</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Reserved By</th>
+          <th>Date Reserved</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for place in reserved_places %}
+          <tr>
+            <td>{{ place.name }}</td>
+            <td>{{ place.reserved_by_user.name }}</td>
+            <td>{{ place.date_reserved }}</td>
+            <td>
+              <a href="{% url 'clear_place' place.id %}" class="btn btn-danger">Clear</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>No Available Places</h2>
+    <p>There are no available parking places at the moment. Please try again later.</p>
+    <a href="{% url 'main' %}" class="btn btn-primary">Back to Main Page</a>
+  </div>
+{% endblock %}
