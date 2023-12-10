@@ -4,11 +4,53 @@
 
 {% block content %}
   <div class="container">
-    <h2 class="mt-4">Parking Statistics</h2>
-    <p>Total Places: {{ total_places }}</p>
-    <p>Available Places: {{ available_places }}</p>
-    <p>Reserved Places: {{ reserved_places }}</p>
-    <p>Total Users: {{ total_users }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Total Place</th>
+          <th>Available Places</th>
+          <th>Reserved Places</th>
+          <th>Total users</th>
+        </tr>
+      </thead>
+     <tbody>
+   
+          <tr>
+            <td>
+              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ total_places }}</h4>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ available_places }}</h4>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ reserved_places }}</h4>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ total_users }}</h4>
+                </div>
+              </div>
+            </td>
+            <td>
+      
+          </tr>
+     
+      </tbody>
+    </table>
+
     <hr>
     <h3 class="mt-4">All Places in Parking</h3>
     <table class="table">

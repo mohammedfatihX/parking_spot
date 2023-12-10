@@ -4,6 +4,29 @@
 
 {% block content %}
   <div class="container">
+    <h2>Available Parking Places</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for place in availbe_places %}
+          <tr>
+            <td>{{ place.name }}</td>
+  
+            <td>
+              <a href="{% url 'reserve_place' place.id %}" class="btn btn-success">Reserve</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    
     <h2>Reserved Parking Places</h2>
     <table class="table">
       <thead>
