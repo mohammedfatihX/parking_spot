@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-
+import logging
 from .models import ParkingPlace, User
 
 
@@ -35,9 +35,10 @@ def main_skip(request,place_id):
         return render(request, 'place_not_available.html')
 
 def reserved_places(request):
-    reserved_places = ParkingPlace.objects.filter(is_available=False)
-    non_reserved_places = ParkingPlace.objects.filter(is_available=True)
-    return render(request, 'reserved_places.html', {'reserved_places': reserved_places,'availbe_places':non_reserved_places})
+    # reserved_places = ParkingPlace.objects.filter(is_available=False)
+    # non_reserved_places = ParkingPlace.objects.filter(is_available=True)
+    allplace=ParkingPlace.objects.all()
+    return render(request, 'reserved_places.html', {'places': allplace})
 
 
 def static_page(request):
@@ -45,14 +46,15 @@ def static_page(request):
     available_places = ParkingPlace.objects.filter(is_available=True).count()
     reserved_places = ParkingPlace.objects.filter(is_available=False).count()
     reserved_places_ = ParkingPlace.objects.filter(is_available=False)
+    users = User.objects.all
     total_users = User.objects.count()
 
     return render(request, 'static_page.html', {
         'total_places': total_places,
         'available_places': available_places,
-        'reserved_places_' : reserved_places_,
         'reserved_places': reserved_places,
         'total_users': total_users,
+        "users":users
     })
 
 def reserve_place(request, place_id):
@@ -68,7 +70,7 @@ def reserve_place(request, place_id):
         return render(request, 'place_not_available.html')
 
 # def skip_place(request):
-#     next_available_place = ParkingPlace.objects.filter(is_available=True).
+#     next_available_place = ParkingPlace.objects.filter(is_available=True).first()
 
 #     if next_available_place:
 #         return redirect('main_skip', place_id=next_available_place.id)
@@ -88,4 +90,25 @@ def clear_place(request, place_id):
     place.save()
 
     return redirect('reserved_places')
+
+
+def deleteUser(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if not user:
+        return render(request,'nouser.html')
+    places =ParkingPlace.objects.filter(reserved_by_user=user.id).all()
+    for place in places:
+        place.is_available = True
+        place.reserved_by_user = None
+        place.date_reserved = None
+        place.save()
+
+    user.delete()
+    return redirect('static_page')
+
+    
+    
+
+
+
 

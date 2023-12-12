@@ -17,28 +17,28 @@
    
           <tr>
             <td>
-              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+              <div class="card text-white bg-primary mb-3" >
                 <div class="card-body">
                   <h4 class="card-title">{{ total_places }}</h4>
                 </div>
               </div>
             </td>
             <td>
-              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+              <div class="card text-white bg-primary mb-3" >
                 <div class="card-body">
                   <h4 class="card-title">{{ available_places }}</h4>
                 </div>
               </div>
             </td>
             <td>
-              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+              <div class="card text-white bg-primary mb-3" >
                 <div class="card-body">
                   <h4 class="card-title">{{ reserved_places }}</h4>
                 </div>
               </div>
             </td>
             <td>
-              <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+              <div class="card text-white bg-primary mb-3" >
                 <div class="card-body">
                   <h4 class="card-title">{{ total_users }}</h4>
                 </div>
@@ -52,23 +52,23 @@
     </table>
 
     <hr>
-    <h3 class="mt-4">All Places in Parking</h3>
+    <h3 class="mt-4">All User in Parking</h3>
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>isAvailable</th>
-          <th>Reserved By</th>
-          <th>Date Reserved</th>
+          <th>Number Phone</th>
+          <th>Action</tr>
         </tr>
       </thead>
      <tbody>
-        {% for place in reserved_places_ %}
+        {% for user in users %}
           <tr>
-            <td>{{ place.name }}</td>
-            <td>{{ place.is_available }}</td>
-            <td>{{ place.reserved_by_user.name }}</td>
-            <td>{{ place.date_reserved }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>              
+              <a href="{% url 'delete_user' user.id %}" class="btn btn-danger">delete</a>
+            </td>
           </tr>
         {% endfor %}
       </tbody>

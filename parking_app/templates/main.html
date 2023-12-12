@@ -5,28 +5,22 @@
   <div class="container mt-5">
     {% if available_place %}
       <h2 class="mb-4">Available Place</h2>
-      <div class="card">
-        <h3 class="card-title">{{ available_place.name }}</h3>
+      <div class="card mx-auto" style="width: 21rem;">
+        <h3 class="card-title mx-auto my-5">{{ available_place.name }}</h3>
 
-        <div class="card-body">
-          <div class="d-grid gap-2">
+        <div class="card-body d-flex">
             <form action="{% url 'reserve_place' available_place.id %}" method="post">
               {% csrf_token %}
-              <div class="d-grid ">
-                <button type="submit" class="btn btn-lg btn-primary mr-2">Reserve</button>
-              </div>
+                <button type="submit" class="btn btn-primary m-1"style="width: 9rem;">Reserve</button>
               
             </form>
 
          
-            <form action="{% url 'skip_place_id' available_place.id %}" method="post" >
+            <form " action="{% url 'skip_place_id' available_place.id %}" method="post" >
               {% csrf_token %}
-              <div class="d-grid">
-                <button type="submit" class="btn btn-lg btn-secondary">Skip</button>
-              </div>
+                <button type="submit" class="btn  btn-secondary m-1" style="width: 9rem;">Skip</button>
               
             </form>
-          </div>
         </div>
       </div>
     {% else %}

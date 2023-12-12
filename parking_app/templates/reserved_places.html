@@ -3,31 +3,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container">
-    <h2>Available Parking Places</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        {% for place in availbe_places %}
-          <tr>
-            <td>{{ place.name }}</td>
-  
-            <td>
-              <a href="{% url 'reserve_place' place.id %}" class="btn btn-success">Reserve</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
     
-    
-    <h2>Reserved Parking Places</h2>
+   
+    <div class="container">
+      <h1>Parking Places</h1></br>
     <table class="table">
       <thead>
         <tr>
@@ -38,13 +18,30 @@
         </tr>
       </thead>
       <tbody>
-        {% for place in reserved_places %}
+        {% for place in places %}
           <tr>
             <td>{{ place.name }}</td>
-            <td>{{ place.reserved_by_user.name }}</td>
-            <td>{{ place.date_reserved }}</td>
+            <td>   
+               {% if place.is_available %}
+               {% else %}
+               {{ place.reserved_by_user.name }}
+
+              {% endif %}
+              
+            </td>
             <td>
+              {% if place.is_available %}
+              {% else %}
+              {{ place.date_reserved }}
+              {% endif %}
+            </td>
+            <td>
+              {% if place.is_available %}
+              <a href="" class="btn btn-success">Available</a>
+              {% else %}
               <a href="{% url 'clear_place' place.id %}" class="btn btn-danger">Clear</a>
+              {% endif %}
+
             </td>
           </tr>
         {% endfor %}
