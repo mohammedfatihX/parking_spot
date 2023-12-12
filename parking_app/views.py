@@ -69,13 +69,6 @@ def reserve_place(request, place_id):
     else:
         return render(request, 'place_not_available.html')
 
-# def skip_place(request):
-#     next_available_place = ParkingPlace.objects.filter(is_available=True).first()
-
-#     if next_available_place:
-#         return redirect('main_skip', place_id=next_available_place.id)
-#     else:
-#         return render(request, 'no_available_places.html')
 
 
 def clear_place(request, place_id):
